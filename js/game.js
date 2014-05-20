@@ -109,14 +109,14 @@ Player.prototype.step = function(dt) {
 
   // Determines player's rate of fire and speed
 
-  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 100) {
+  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 10) {
     GameAudio.play('fire');
     this.board.addSprite('missile',
                           this.x + this.w/2 - Sprites.map.missile.w/2,
                           this.y-this.h,
                           { dy: -200, player: true });
     this.board.missiles++;
-    this.reloading = 10;
+    this.reloading = 1;
   }
   return true;
 }
