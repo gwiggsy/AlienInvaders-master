@@ -120,7 +120,7 @@ Player.prototype.step = function(dt) {
                           this.y - 5,
                           { dy: -200, player: true });
     this.board.missiles++;
-    this.reloading = 1;
+    this.reloading = 10;
   }
   return true;
 }
