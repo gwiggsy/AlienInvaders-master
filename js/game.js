@@ -1,4 +1,8 @@
 
+
+
+
+
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -77,10 +81,10 @@ Alien.prototype.step = function(dt) {
 }
 
 Alien.prototype.fireSometimes = function() {
-      if(Math.random()*100 < 10) {
+      if(Math.random()*100 < 15) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
                                       this.y + this.h, 
-                                     { dy: 100 });
+                                     { dy: 130 });
       }
 }
 
@@ -107,19 +111,23 @@ Player.prototype.step = function(dt) {
 
   this.reloading--;
 
-  // Determines player's rate of fire and speed
+  // Determines player's rate of fire and speed. Also determines where the missile shoots from.
 
-  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 100) {
+  if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 10) {
     GameAudio.play('fire');
     this.board.addSprite('missile',
                           this.x + this.w/2 - Sprites.map.missile.w/2,
-                          this.y-this.h,
+                          this.y - 5,
                           { dy: -200, player: true });
     this.board.missiles++;
     this.reloading = 10;
   }
   return true;
 }
+
+
+
+
 
 
 var Missile = function Missile(opts) {
@@ -147,3 +155,4 @@ Missile.prototype.die = function() {
   if(this.board.missiles < 0) this.board.missiles=0;
    this.board.remove(this);
 }
+
