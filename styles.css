@@ -1,0 +1,23 @@
+
+@-webkit-keyframes animatedBackground {
+	
+	to { background-position: 100%; }
+}
+
+#gameboard	{ 
+	width: 700px; 
+	height: 700px; 
+	background-image: url('images/bgtest.png');
+	background-position: 0px 0px;
+	background-repeat: repeat-y;
+	border-radius: 20px;
+	background-color: #030514;
+
+
+	-webkit-animation: animatedBackground 40s linear infinite;
+}
+
+#game-wrapper { 
+	margin:0 auto; 
+	width: 700px; 
+}
