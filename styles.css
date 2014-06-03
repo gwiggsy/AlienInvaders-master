@@ -4,20 +4,32 @@
 	to { background-position: 100%; }
 }
 
+
+
 #gameboard	{ 
 	width: 700px; 
-	height: 700px; 
+	height: 500px; 
 	background-image: url('images/bgtest.png');
 	background-position: 0px 0px;
 	background-repeat: repeat-y;
 	border-radius: 20px;
 	background-color: #030514;
+	border: #fd53f4  10px solid;
 
 
-	-webkit-animation: animatedBackground 40s linear infinite;
+	-webkit-animation: animatedBackground 30s linear infinite;
 }
 
 #game-wrapper { 
 	margin:0 auto; 
 	width: 700px; 
+	padding-top: 100px;
+	padding-left: 80px;
+
+}
+
+body {background-image: url('images/arcade.jpg' );
+
+padding-bottom: 100px;
+
 }
