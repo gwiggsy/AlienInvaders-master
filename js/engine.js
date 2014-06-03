@@ -1,5 +1,5 @@
 var Game = new function() {                                                                  
-  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire', 17:'fire' };
+  var KEY_CODES = {  40: 'down', 38: 'up', 37:'left', 39:'right', 32 :'fire', 66:'fire2' };
   this.keys = {};
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
@@ -26,7 +26,7 @@ var Game = new function() {
   this.loop = function() { 
     Game.board.step(30/1000); 
     Game.board.render(Game.canvas);
-    setTimeout(Game.loop,15);
+    setTimeout(Game.loop,10);
   };
 };
 
@@ -137,8 +137,11 @@ var GameBoard = function GameBoard(level_number) {
         var alien = Sprites.map['alien' + level[y][x]];
         if(alien) { 
           this.addSprite('alien' + level[y][x], // Which Sprite
-                         (alien.w+10)*x,  // X
-                         alien.h*y,       // Y
+                         (alien.w+10)*x,
+                         (alien.h+10)*y,  
+                         
+
+                                
                          { flock: flock }); // Options
         }
       }
