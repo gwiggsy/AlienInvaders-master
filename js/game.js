@@ -1,13 +1,8 @@
-
-
-
-
-
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
   this.hit = 1; this.lastHit = 0;
-  this.speed = 10;
+  this.speed = 5;
 
   this.draw = function() {};
 
@@ -77,11 +72,14 @@ Alien.prototype.step = function(dt) {
     if(this.x > Game.width - Sprites.map.alien1.w * 2) this.flock.hit = -1;
     if(this.x < Sprites.map.alien1.w) this.flock.hit = 1;
   }
+
+
+
   return true;
 }
 
 Alien.prototype.fireSometimes = function() {
-      if(Math.random()*100 < 15) {
+      if(Math.random()*100 < 20) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
                                       this.y + this.h, 
                                      { dy: 130 });
@@ -105,9 +103,14 @@ Player.prototype.die = function() {
 Player.prototype.step = function(dt) {
   if(Game.keys['left']) { this.x -= 100 * dt; }
   if(Game.keys['right']) { this.x += 100 * dt; }
+  if(Game.keys['up']) { this.y -= 100 * dt; }
+  if(Game.keys['down']) { this.y += 100 * dt; }
+
 
   if(this.x < 0) this.x = 0;
   if(this.x > Game.width-this.w) this.x = Game.width-this.w;
+  if(this.y < 0) this.y = 0;
+  if(this.y > Game.height-this.w) this.y = Game.height-this.w;
 
   this.reloading--;
 
@@ -122,8 +125,22 @@ Player.prototype.step = function(dt) {
     this.board.missiles++;
     this.reloading = 10;
   }
+
+
+
+  if(Game.keys['fire2'] && this.reloading <= 0 && this.board.missiles < 1000) {
+    GameAudio.play('fire');
+    this.board.addSprite('missile',
+                          this.x + this.w/2 - Sprites.map.missile.w/2,
+                          this.y -200,
+                          { dy: -300, player: true });
+    this.board.missiles++;
+    this.reloading = 1;
+  }
   return true;
 }
+
+
 
 
 
