@@ -1,6 +1,6 @@
 var Game = new function() {                                                                  
   var KEY_CODES = {  40: 'down', 38: 'up', 37:'left', 39:'right', 32 :'fire', 66:'fire2' };
-  this.keys = {};
+  this.keys = {}; //key commands for certain functions
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
     this.canvas_elem = $(canvas_dom)[0];
@@ -26,7 +26,7 @@ var Game = new function() {
   this.loop = function() { 
     Game.board.step(30/1000); 
     Game.board.render(Game.canvas);
-    setTimeout(Game.loop,10);
+    setTimeout(Game.loop,10); // game speed
   };
 };
 

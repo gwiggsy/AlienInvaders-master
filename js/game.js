@@ -49,17 +49,17 @@ var Alien = function Alien(opts) {
   this.mx = 0;
 }
 
-Alien.prototype.draw = function(canvas) {
+Alien.prototype.draw = function(canvas) { //draws aliens on the canvas
   Sprites.draw(canvas,this.name,this.x,this.y,this.frame);
 }
 
-Alien.prototype.die = function() {
+Alien.prototype.die = function() { //alien death functions
   GameAudio.play('die');
   this.flock.speed += 1;
   this.board.remove(this);
 }
 
-Alien.prototype.step = function(dt) {
+Alien.prototype.step = function(dt) { //flock behaviour and movement
   this.mx += dt * this.flock.dx;
   this.y += this.flock.dy;
   if(Math.abs(this.mx) > 10) {
@@ -78,7 +78,7 @@ Alien.prototype.step = function(dt) {
   return true;
 }
 
-Alien.prototype.fireSometimes = function() {
+Alien.prototype.fireSometimes = function() { // alien fire behaviour
       if(Math.random()*100 < 20) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
                                       this.y + this.h, 
@@ -95,19 +95,19 @@ Player.prototype.draw = function(canvas) {
 }
 
 
-Player.prototype.die = function() {
+Player.prototype.die = function() { //funtion linked with audio
   GameAudio.play('die');
   Game.callbacks['die']();
 }
 
-Player.prototype.step = function(dt) {
+Player.prototype.step = function(dt) { //commands for keyboard controls
   if(Game.keys['left']) { this.x -= 100 * dt; }
   if(Game.keys['right']) { this.x += 100 * dt; }
   if(Game.keys['up']) { this.y -= 100 * dt; }
   if(Game.keys['down']) { this.y += 100 * dt; }
 
 
-  if(this.x < 0) this.x = 0;
+  if(this.x < 0) this.x = 0; //player contraints
   if(this.x > Game.width-this.w) this.x = Game.width-this.w;
   if(this.y < 0) this.y = 0;
   if(this.y > Game.height-this.w) this.y = Game.height-this.w;
@@ -127,7 +127,7 @@ Player.prototype.step = function(dt) {
   }
 
 
-
+//alternate fire using b key (hidden game secret)
   if(Game.keys['fire2'] && this.reloading <= 0 && this.board.missiles < 1000) {
     GameAudio.play('fire');
     this.board.addSprite('missile',
@@ -144,7 +144,7 @@ Player.prototype.step = function(dt) {
 
 
 
-
+//missile properties below
 
 
 var Missile = function Missile(opts) {
@@ -172,4 +172,5 @@ Missile.prototype.die = function() {
   if(this.board.missiles < 0) this.board.missiles=0;
    this.board.remove(this);
 }
+
 
